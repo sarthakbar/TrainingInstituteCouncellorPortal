@@ -50,7 +50,7 @@ public class CouncellorServiceImpl implements CouncellorService{
 		if(crepo.existsByEmail(councellor.getEmail()))
 		{
 		return false;
-		} 
+		}  
 		
 		crepo.save(councellor);
 		return true;

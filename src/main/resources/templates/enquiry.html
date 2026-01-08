@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Enquiries</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Optional custom CSS -->
+    <link rel="stylesheet" th:href="@{/CSS/dashboard.css}">
+</head>
+
+<body class="bg-light">
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="#">Counsellor Portal</a>
+
+        <!-- ✅ TOGGLER BUTTON (IMPORTANT) -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- ✅ COLLAPSIBLE MENU -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/enquiry}">Add Enquiry</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/view-enquiries}">
+                        View Enquiries
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-danger" th:href="@{/logout}">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+
+<!-- Main Content -->
+<div class="container-fluid mt-4 px-4">
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">View Enquiries</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover text-center align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Enquiry ID</th>
+                            <th>Name</th>
+                            <th>Phone No</th>
+                            <th>Course</th>
+                            <th>Mode</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="enq : ${Enquiries}">
+                            <td th:text="${enq.enq_id}"></td>
+                            <td th:text="${enq.studentName}"></td>
+                            <td th:text="${enq.studentPhno}"></td>
+                            <td th:text="${enq.courseName}"></td>
+                            <td th:text="${enq.classMode}"></td>
+                            <td>
+                                <span class="badge bg-info"
+                                      th:text="${enq.enqStatus}"></span>
+                            </td>
+                            <td>
+                                <a th:href="@{/edit-enquiry/{id}(id=${enq.enq_id})}"
+                                   class="btn btn-sm btn-warning">
+                                    Edit
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -2,7 +2,9 @@ package com.at.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 
 import com.at.dto.ViewEnquiryFilter;
 import com.at.entity.Councellor;
@@ -13,11 +15,11 @@ import com.at.repositories.EnquiryRepo;
 import io.micrometer.common.util.StringUtils;
 
    
-
+@Service
 public class EnquiryServiceImpl implements EnquiryService{
-
+     @Autowired
 	 private CouncellorRepo crepo;
-	 
+	 @Autowired
 	 private EnquiryRepo erepo;
 	
 	@Override

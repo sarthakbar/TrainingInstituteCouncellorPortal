@@ -74,8 +74,6 @@ public class CouncellorController {
 	{
 		boolean isRegistered= cservice.register(councellor);
 		
-		
-		
 		if(isRegistered)
 		{
 			model.addAttribute("smsg", "Registration success..");

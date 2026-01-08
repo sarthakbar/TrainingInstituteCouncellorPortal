@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f2f4f8;   /* soft grey background */
+    color: #2c2c2c;
+}
+
+/* =======================
+   Top Navigation
+======================= */
+.top-nav {
+    background: linear-gradient(90deg, #1e3c72, #2a5298);
+    padding: 14px 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.top-nav a:hover {
+    text-decoration: underline;
+}
+
+.logout {
+    color: #ffd6d6 !important;
+}
+
+/* =======================
+   Main Container
+======================= */
+.container {
+    max-width: 600px;
+    margin: 45px auto;
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* =======================
+   Heading
+======================= */
+.container h1 {
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #1e3c72;
+    border-bottom: 3px solid #2a5298;
+    padding-bottom: 8px;
+}
+
+/* =======================
+   Stats Section
+======================= */
+.stats-box {
+    margin-top: 20px;
+}
+
+/* Each row */
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background: #f7f9fc;
+}
+
+/* Labels */
+.stat-row span:first-child {
+    font-weight: 500;
+}
+
+/* Values */
+.stat-row span:last-child {
+    font-weight: 700;
+}
+
+/* Individual colors */
+.stat-row:nth-child(1) span:last-child {
+    color: #1e88e5; /* Total */
+}
+
+.stat-row:nth-child(2) span:last-child {
+    color: #fb8c00; /* Open */
+}
+
+.stat-row:nth-child(3) span:last-child {
+    color: #43a047; /* Enrolled */
+}
+
+.stat-row:nth-child(4) span:last-child {
+    color: #e53935; /* Lost */
+}
