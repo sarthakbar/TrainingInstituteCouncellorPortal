@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.at.dto.DashboardResponse;
+import com.at.dto.ViewEnquiryFilter;
 import com.at.entity.Enquiry;
 import com.at.service.CouncellorService;
 import com.at.service.EnquiryService;
@@ -67,12 +69,37 @@ public class EnquiryController {
 	@GetMapping("/view-enquiries")
 	public String getEnquiries(HttpServletRequest req, Model model)
 	{
-		HttpSession request =req.getSession(false);
-		Integer cId=(Integer)request.getAttribute("councellorId");
+		HttpSession session =req.getSession(false);
+		Integer cId=(Integer)session.getAttribute("councellorId");
 		
 		List<Enquiry> EnqList=eser.getAllEnquiries(cId);
 		model.addAttribute("Enquiries",EnqList);
 		
+		ViewEnquiryFilter filt=new ViewEnquiryFilter();
+		model.addAttribute("viewEnquiryFilter",filt);
+		
+		return "enquiry";
+	}
+	
+	@GetMapping("/editEnq")
+	public String editEnquiry(@RequestParam("enqId")Integer enqId, Model model)
+	{
+		Enquiry enquiry=eser.getEnquiryById(enqId);
+		model.addAttribute("enq",enquiry);
+		
+		return "enquiryForm";
+	}
+	
+	@PostMapping("/filter-enqs")
+	public String filterEnquiries(@ModelAttribute("viewEnquiryFilter")ViewEnquiryFilter viewEnquiryFilter ,HttpServletRequest req, Model model)
+	{
+		HttpSession session = req.getSession();
+		Integer cId=(Integer) session.getAttribute("councellorId");
+		
+		
+		List<Enquiry> enqList=eser.getEnquiriesWithfilter(viewEnquiryFilter, cId);
+		model.addAttribute("Enquiries", enqList);
+		// model.addAttribute("viewEnquiryFilter", viewEnquiryFilter);
 		return "enquiry";
 	}
 	

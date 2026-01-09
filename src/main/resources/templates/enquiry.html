@@ -60,15 +60,71 @@
 
     <div class="card shadow">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">View Enquiries</h4>
+            <h4 class="mb-0">View Enquiries Here</h4>
         </div>
+        
+      <form th:action="@{/filter-enqs}"
+      th:object="${viewEnquiryFilter}"
+      method="post"
+      class="d-flex align-items-center gap-3 mt-2 ms-4 flex-nowrap">
+
+    <!-- Class Mode -->
+    <div class="d-flex align-items-center gap-1 text-nowrap">
+        <label class="small fw-semibold mb-0">
+            Class&nbsp;Mode:
+        </label>
+        <select th:field="*{classMode}" class="form-select form-select-sm w-auto">
+            <option value="">-select-</option>
+            <option value="online">Online</option>
+            <option value="classRoom">Classroom</option>
+        </select>
+    </div>
+
+    <!-- Course Mode -->
+    <div class="d-flex align-items-center gap-1 text-nowrap">
+        <label class="small fw-semibold mb-0">
+            Course&nbsp;Mode:
+        </label>
+        <select th:field="*{courseName}" class="form-select form-select-sm w-auto">
+            <option value="">-select-</option>
+            <option value="Java">Java</option>
+            <option value="Python">Python</option>
+            <option value="React">React</option>
+            <option value="Oracle">Oracle</option>
+            <option value="SAP">SAP</option>
+            <option value="Devops">DevOps</option>
+            <option value="Aws">AWS</option>
+        </select>
+    </div>
+
+    <!-- Enquiry Status -->
+    <div class="d-flex align-items-center gap-1 text-nowrap">
+        <label class="small fw-semibold mb-0">
+            Enquiry&nbsp;Status:
+        </label>
+        <select th:field="*{enqStatus}" class="form-select form-select-sm w-auto">
+            <option value="">-select-</option>
+            <option value="open">Open</option>
+            <option value="enrolled">Enrolled</option>
+            <option value="lost">Lost</option>
+        </select>
+    </div>
+
+    <!-- Search -->
+    <button type="submit" class="btn btn-primary btn-sm text-nowrap">
+        search
+    </button>
+
+</form>
+
+
 
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-hover text-center align-middle">
                     <thead class="table-dark">
                         <tr>
-                            <th>Enquiry ID</th>
+                            <th>S No</th>
                             <th>Name</th>
                             <th>Phone No</th>
                             <th>Course</th>
@@ -79,8 +135,8 @@
                     </thead>
 
                     <tbody>
-                        <tr th:each="enq : ${Enquiries}">
-                            <td th:text="${enq.enq_id}"></td>
+                        <tr th:each="enq, counter : ${Enquiries}">
+                            <td th:text="${counter.index +1}"></td>
                             <td th:text="${enq.studentName}"></td>
                             <td th:text="${enq.studentPhno}"></td>
                             <td th:text="${enq.courseName}"></td>
@@ -90,11 +146,14 @@
                                       th:text="${enq.enqStatus}"></span>
                             </td>
                             <td>
-                                <a th:href="@{/edit-enquiry/{id}(id=${enq.enq_id})}"
+                                <a th:href="@{'/editEnq?enqId='+${enq.enq_id}}"
                                    class="btn btn-sm btn-warning">
                                     Edit
                                 </a>
                             </td>
+                        </tr>
+                        <tr th:if="${Enquiries.size()==0}">
+                        <td colspan="7"> No records Found</td>
                         </tr>
                     </tbody>
 
